@@ -24,3 +24,5 @@ yarn-error.log*
 
 #Node Modules
 node_modules/
+
+config/
