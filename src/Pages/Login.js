@@ -8,9 +8,11 @@ function Login() {
 
     const loginwithgoogle = async () =>{
         const result = await signInWithPopup(auth, provider);
+
         console.log(result);
         Navigate("/");
     }
+
 
   return (
     <div class="flex items-center justify-center h-screen">
