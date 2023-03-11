@@ -4,8 +4,13 @@ import Nav from './Pages/Nav';
 import Home from './Pages/Home';
 import Login from './Pages/Login';
 import Createpost from './Pages/Create_Post/CreatePost';
+import { auth } from "./config/fairebase";
+import { useAuthState } from "react-firebase-hooks/auth"
 
 function App() {
+
+  const [user] = useAuthState(auth);
+
   return (
     <div className="App">
       <Router>
@@ -13,7 +18,8 @@ function App() {
         <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path='/login' element={<Login/>}/>
-          <Route path='/createpost' element={<Createpost/>}/>
+          {user && <Route path='/createpost' element={<Createpost/>}/>}
+          <Route path="*" element={<p>404</p>} />
         </Routes>
       </Router>
     </div>

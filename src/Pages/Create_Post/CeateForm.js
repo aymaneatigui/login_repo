@@ -1,8 +1,15 @@
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { db } from "../../config/fairebase";
+import { collection, addDoc } from "firebase/firestore";
+import { auth } from "../../config/fairebase";
+import { useAuthState } from "react-firebase-hooks/auth"
 
 function CreateForm() {
+
+    const [user] = useAuthState(auth);
+
 
     const schema = yup.object().shape({
         title: yup.string().required("You must add Title"),
@@ -14,9 +21,16 @@ function CreateForm() {
         resolver: yupResolver(schema),
     });
 
-    const oncreatepost = (data) =>{
-        console.log(data);
+    const oncreatepost = async (data) => {
+        await addDoc(postref, {
+            ...data,
+            username: user?.displayName,
+            userid: user?.uid,
+        });
     }
+
+    const postref = collection(db, "posts");
+
 
     return (
         <div className="flex justify-center mt-24">
