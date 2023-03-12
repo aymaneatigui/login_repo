@@ -4,12 +4,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { db } from "../../config/fairebase";
 import { collection, addDoc } from "firebase/firestore";
 import { auth } from "../../config/fairebase";
-import { useAuthState } from "react-firebase-hooks/auth"
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom"
 
 function CreateForm() {
 
     const [user] = useAuthState(auth);
-
+    const Navigate = useNavigate();
 
     const schema = yup.object().shape({
         title: yup.string().required("You must add Title"),
@@ -27,6 +28,7 @@ function CreateForm() {
             username: user?.displayName,
             userid: user?.uid,
         });
+        Navigate("/");
     }
 
     const postref = collection(db, "posts");

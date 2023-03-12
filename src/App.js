@@ -1,11 +1,11 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Nav from './Pages/Nav';
-import Home from './Pages/Home';
+import Home from './Pages/Main/Home';
 import Login from './Pages/Login';
 import Createpost from './Pages/Create_Post/CreatePost';
 import { auth } from "./config/fairebase";
-import { useAuthState } from "react-firebase-hooks/auth"
+import { useAuthState } from "react-firebase-hooks/auth";
 
 function App() {
 
